@@ -32,16 +32,33 @@ searchButton.addEventListener('click', function(evt) {
     console.error(err)
   }
 
-
   function createSearchResult(player) {
     var unquotePlayer = player.replace(/"/g, '')
+    var searchablePlayer = unquotePlayer.replace('#', '%23')
     var ul = document.getElementById("searchList");
     var button = document.createElement("button")
     button.onclick = function(event) {
-      console.log('click');
+      console.log(player);
+      getPlayerStats(searchablePlayer);
     };
     button.appendChild(document.createTextNode(unquotePlayer));
     ul.appendChild(button);
+  }
+
+  function getPlayerStats(player){
+    let statsUrl = 'https://sheltered-cove-87506.herokuapp.com/https://api.tracker.gg/api/v2/warzone/standard/profile/atvi/' + player;
+    console.log(statsUrl)
+
+    let stats = fetch(statsUrl, {
+      mode: 'cors'
+    }).then(successFunction).catch(errorFunction)
+
+    function successFunction(stats) {
+      stats.json().then(
+        function(stats) {
+            console.log(JSON.stringify(stats.data.segments[1].stats.kdRatio.value))
+        }).catch(errorFunction)
+    }
   }
 
 })
