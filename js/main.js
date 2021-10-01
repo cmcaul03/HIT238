@@ -34,10 +34,14 @@ searchButton.addEventListener('click', function(evt) {
 
 
   function createSearchResult(player) {
+    var unquotePlayer = player.replace(/"/g, '')
     var ul = document.getElementById("searchList");
-    var li = document.createElement("li");
-    li.appendChild(document.createTextNode(player));
-    ul.appendChild(li);
+    var button = document.createElement("button")
+    button.onclick = function(event) {
+      console.log('click');
+    };
+    button.appendChild(document.createTextNode(unquotePlayer));
+    ul.appendChild(button);
   }
 
 })
