@@ -2,7 +2,7 @@
 
 html,body,main {
   height:100%;
-  width: 95%;
+  width: auto;
   display: flex;
   flex-direction: column; }
 
@@ -31,6 +31,7 @@ section.initialContent, section.searchContent {
 section.searchContent {
   display: none;
   max-height: 70%;
+  width: auto;
 }
 
 section.initialContent {
