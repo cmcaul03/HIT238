@@ -38,6 +38,7 @@ searchButton.addEventListener('click', function(evt) {
     var ul = document.getElementById("searchList");
     var button = document.createElement("button")
     button.onclick = function(event) {
+      displayLoadScreen()
       console.log(player);
       getPlayerStats(searchablePlayer);
     };
@@ -72,7 +73,69 @@ searchButton.addEventListener('click', function(evt) {
     function successFunction(stats) {
       stats.json().then(
         function(stats) {
-            console.log(JSON.stringify(stats.data.segments[1].stats.kdRatio.value))
+          var statsContent = document.getElementsByClassName("statsContent")[0];
+          statsContent.innerHTML = '';
+          var h2 = document.createElement("h2")
+          h2.appendChild(document.createTextNode(player));
+          console.log(h2)
+          statsContent.appendChild(h2);
+
+          var lifetimeStatsArticle = document.createElement("article")
+          lifetimeStatsArticle.setAttribute("id", "lifetimeStats");
+          var h3 = document.createElement("h3")
+          h3.appendChild(document.createTextNode("Lifetime Stats"));
+
+          var lifetimeKD = document.createElement("div")
+          lifetimeKDHeaderU = lifetimeKD.appendChild(document.createElement("U"));
+          lifetimeKDHeaderU.appendChild(document.createTextNode("KD"));
+          lifetimeKDDiv = lifetimeKD.appendChild(document.createElement("div"));
+          lifetimeKDDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.kdRatio.value))));
+
+          var lifetimeKills = document.createElement("div")
+          lifetimeKillsHeaderU = lifetimeKills.appendChild(document.createElement("U"));
+          lifetimeKillsHeaderU.appendChild(document.createTextNode("Kills"));
+          lifetimeKillsDiv = lifetimeKills.appendChild(document.createElement("div"));
+          lifetimeKillsDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.kills.value))));
+
+          var lifetimeDeaths = document.createElement("div")
+          lifetimeDeathsHeaderU = lifetimeDeaths.appendChild(document.createElement("U"));
+          lifetimeDeathsHeaderU.appendChild(document.createTextNode("Deaths"));
+          lifetimeDeathsDiv = lifetimeDeaths.appendChild(document.createElement("div"));
+          lifetimeDeathsDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.deaths.value))));
+
+          var lifetimeMatches = document.createElement("div")
+          lifetimeMatchesHeaderU = lifetimeMatches.appendChild(document.createElement("U"));
+          lifetimeMatchesHeaderU.appendChild(document.createTextNode("Matches"));
+          lifetimeMatchesDiv = lifetimeMatches.appendChild(document.createElement("div"));
+          lifetimeMatchesDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.gamesPlayed.value))));
+
+          var lifetimeWins = document.createElement("div")
+          lifetimeWinsHeaderU = lifetimeWins.appendChild(document.createElement("U"));
+          lifetimeWinsHeaderU.appendChild(document.createTextNode("Wins"));
+          lifetimeWinsDiv = lifetimeWins.appendChild(document.createElement("div"));
+          lifetimeWinsDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.wins.value))));
+
+          var lifetimeWinRatio = document.createElement("div")
+          lifetimeWinRatioHeaderU = lifetimeWinRatio.appendChild(document.createElement("U"));
+          lifetimeWinRatioHeaderU.appendChild(document.createTextNode("Win Ratio"));
+          lifetimeWinRatioDiv = lifetimeWinRatio.appendChild(document.createElement("div"));
+          lifetimeWinRatioDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.wlRatio.value))));
+
+          lifetimeStatsArticle.appendChild(h3)
+          lifetimeStatsArticle.appendChild(lifetimeKills)
+          lifetimeStatsArticle.appendChild(lifetimeDeaths)
+          lifetimeStatsArticle.appendChild(lifetimeKD)
+          lifetimeStatsArticle.appendChild(lifetimeMatches)
+          lifetimeStatsArticle.appendChild(lifetimeWins)
+          lifetimeStatsArticle.appendChild(lifetimeWinRatio)
+
+
+          statsContent.appendChild(lifetimeStatsArticle);
+
+          console.log(JSON.stringify(stats.data.segments[1].stats.kdRatio.value))
+
+          hideLoadScreen()
+          statsContent.style.display = "block";
         }).catch(errorFunction)
     }
   }

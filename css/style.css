@@ -21,6 +21,11 @@ section.loadingContent {
   color: white;
 }
 
+section.initialContent p {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
 section.initialContent, section.searchContent, section.statsContent, section.loadingContent {
   margin: 20px 1%;
   color: #CCCCCC;
@@ -30,6 +35,21 @@ section.initialContent, section.searchContent, section.statsContent, section.loa
   height: 90%;
   padding-bottom: 28px;
   text-align: center;
+}
+
+section.statsContent article {
+  margin: 20px 1%;
+  color: #CCCCCC;
+  background-color: #333333;
+  border-style: solid;
+  float: none;
+  padding-bottom: 14px;
+  text-align: center;
+}
+
+section.statsContent article div {
+  text-align: center;
+  padding: 10px;
 }
 
 section.searchContent, section.statsContent, section.loadingContent {
@@ -59,6 +79,10 @@ section.initialContent {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+div {
+    display: inline-block;
 }
 
 form {
