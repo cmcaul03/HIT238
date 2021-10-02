@@ -46,14 +46,13 @@ searchButton.addEventListener('click', function(evt) {
 
   function successFunction(searchResult) {
     var ul = document.getElementsByClassName("searchList");
-    ul.innerHTML = '';
+    ul[0].innerHTML = '';
     searchResult.json().then(
       function(searchResult) {
         if (searchResult.data.length == 0) {
           errorFunction("No results found")
         }
         for (var i = 0; i < searchResult.data.length; i++) {
-          console.log('here too')
           console.log(JSON.stringify(searchResult))
           console.log(JSON.stringify(searchResult.data[i].platformUserHandle))
           createSearchResult(JSON.stringify(searchResult.data[i].platformUserHandle))
