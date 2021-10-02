@@ -87,37 +87,37 @@ searchButton.addEventListener('click', function(evt) {
 
           var lifetimeKD = document.createElement("div")
           lifetimeKDHeaderU = lifetimeKD.appendChild(document.createElement("U"));
-          lifetimeKDHeaderU.appendChild(document.createTextNode("KD"));
+          lifetimeKDHeaderU.appendChild(document.createTextNode("KD:"));
           lifetimeKDDiv = lifetimeKD.appendChild(document.createElement("div"));
           lifetimeKDDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.kdRatio.value))));
 
           var lifetimeKills = document.createElement("div")
           lifetimeKillsHeaderU = lifetimeKills.appendChild(document.createElement("U"));
-          lifetimeKillsHeaderU.appendChild(document.createTextNode("Kills"));
+          lifetimeKillsHeaderU.appendChild(document.createTextNode("Kills:"));
           lifetimeKillsDiv = lifetimeKills.appendChild(document.createElement("div"));
           lifetimeKillsDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.kills.value))));
 
           var lifetimeDeaths = document.createElement("div")
           lifetimeDeathsHeaderU = lifetimeDeaths.appendChild(document.createElement("U"));
-          lifetimeDeathsHeaderU.appendChild(document.createTextNode("Deaths"));
+          lifetimeDeathsHeaderU.appendChild(document.createTextNode("Deaths:"));
           lifetimeDeathsDiv = lifetimeDeaths.appendChild(document.createElement("div"));
           lifetimeDeathsDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.deaths.value))));
 
           var lifetimeMatches = document.createElement("div")
           lifetimeMatchesHeaderU = lifetimeMatches.appendChild(document.createElement("U"));
-          lifetimeMatchesHeaderU.appendChild(document.createTextNode("Matches"));
+          lifetimeMatchesHeaderU.appendChild(document.createTextNode("Matches:"));
           lifetimeMatchesDiv = lifetimeMatches.appendChild(document.createElement("div"));
           lifetimeMatchesDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.gamesPlayed.value))));
 
           var lifetimeWins = document.createElement("div")
           lifetimeWinsHeaderU = lifetimeWins.appendChild(document.createElement("U"));
-          lifetimeWinsHeaderU.appendChild(document.createTextNode("Wins"));
+          lifetimeWinsHeaderU.appendChild(document.createTextNode("Wins:"));
           lifetimeWinsDiv = lifetimeWins.appendChild(document.createElement("div"));
           lifetimeWinsDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.wins.value))));
 
           var lifetimeWinRatio = document.createElement("div")
           lifetimeWinRatioHeaderU = lifetimeWinRatio.appendChild(document.createElement("U"));
-          lifetimeWinRatioHeaderU.appendChild(document.createTextNode("Win Ratio"));
+          lifetimeWinRatioHeaderU.appendChild(document.createTextNode("Win Ratio:"));
           lifetimeWinRatioDiv = lifetimeWinRatio.appendChild(document.createElement("div"));
           lifetimeWinRatioDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.wlRatio.value))));
 
