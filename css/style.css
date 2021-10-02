@@ -17,7 +17,11 @@ header img  {
 	width: 90%;
 }
 
-section.initialContent, section.searchContent {
+section.loadingContent {
+  color: white;
+}
+
+section.initialContent, section.searchContent, section.statsContent, section.loadingContent {
   margin: 20px 1%;
   color: #CCCCCC;
   background-color: #333333;
@@ -28,13 +32,33 @@ section.initialContent, section.searchContent {
   text-align: center;
 }
 
-section.searchContent {
+section.searchContent, section.statsContent, section.loadingContent {
   display: none;
   width: auto;
 }
 
+section.loadingContent {
+  padding-top: 5%;
+}
+
+
 section.initialContent {
   display: block;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  margin: auto;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 form {

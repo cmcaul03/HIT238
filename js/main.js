@@ -1,6 +1,7 @@
 searchButton.addEventListener('click', function(evt) {
   evt.preventDefault();
   console.log('click');
+  displayLoadScreen()
 
   let key = "defaultPlayer"
   let value = document.querySelector('#playerSearchInput').value;
@@ -20,8 +21,7 @@ searchButton.addEventListener('click', function(evt) {
         for (var i = 0; i < searchResult.data.length; i++) {
           console.log(JSON.stringify(searchResult.data[i].platformUserHandle))
           createSearchResult(JSON.stringify(searchResult.data[i].platformUserHandle))
-          var initialContent = document.getElementsByClassName("initialContent");
-          initialContent[0].style.display = "none";
+          hideLoadScreen()
           var searchContent = document.getElementsByClassName("searchContent");
           searchContent[0].style.display = "block";
         }
@@ -43,6 +43,22 @@ searchButton.addEventListener('click', function(evt) {
     };
     button.appendChild(document.createTextNode(unquotePlayer));
     ul.appendChild(button);
+  }
+
+  function displayLoadScreen() {
+    var initialContent = document.getElementsByClassName("initialContent");
+    initialContent[0].style.display = "none";
+    var searchContent = document.getElementsByClassName("searchContent");
+    searchContent[0].style.display = "none";
+    var statsContent = document.getElementsByClassName("statsContent");
+    statsContent[0].style.display = "none";
+    var loadingContent = document.getElementsByClassName("loadingContent");
+    loadingContent[0].style.display = "block";
+  }
+
+  function hideLoadScreen() {
+    var loadingContent = document.getElementsByClassName("loadingContent");
+    loadingContent[0].style.display = "none";
   }
 
   function getPlayerStats(player){
