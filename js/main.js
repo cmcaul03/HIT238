@@ -3,20 +3,19 @@ searchButton.addEventListener('click', function(evt) {
   evt.preventDefault();
   displayLoadScreen()
 
-  // This section saves the player to local localStorage
-  // It's not used yet, but i plan on using it for some later functionality
-
-  let key = "defaultPlayer"
   let value = document.querySelector('.playerSearchInput').value;
-  localStorage.setItem(key, value);
+  if (value.length < 3) {
+    errorFunction("Less than three characters entered in search input.\
+    Please enter at least three characters.")
+    return
+  }
 
-  // Fetches the
   let url = 'https://sheltered-cove-87506.herokuapp.com/https://api.tracker.gg/api/v2/warzone/standard/search?platform=atvi&query=' + value + '&autocomplete=true ';
 
   function timeout(ms, promise) {
     return new Promise((resolve, reject) => {
       const timer = setTimeout(() => {
-        reject(new Error('TIMEOUT'))
+        reject(new Error('Backend connection timed out'))
       }, ms)
 
       promise
@@ -34,7 +33,6 @@ searchButton.addEventListener('click', function(evt) {
   var searchData = timeout(5000, fetch(url, {mode: 'cors'})).then(function(response) {
     successFunction(response)
   }).catch(function(error) {
-    console.log(error)
     errorFunction(error)
   })
 
@@ -75,7 +73,6 @@ searchButton.addEventListener('click', function(evt) {
     errorContent[0].appendChild(p);
     errorContent[0].style.display = "block";
     console.error(err)
-
   }
 
   function createSearchResult(player) {
