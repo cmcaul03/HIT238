@@ -31,7 +31,7 @@ searchButton.addEventListener('click', function(evt) {
     })
   }
 
-  var searchData = timeout(1000, fetch(url, {mode: 'cors'})).then(function(response) {
+  var searchData = timeout(5000, fetch(url, {mode: 'cors'})).then(function(response) {
     successFunction(response)
   }).catch(function(error) {
     console.log(error)
