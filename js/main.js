@@ -1,24 +1,60 @@
 searchButton.addEventListener('click', function(evt) {
+  clearTimeout()
   evt.preventDefault();
-  console.log('click');
   displayLoadScreen()
 
+  // This section saves the player to local localStorage
+  // It's not used yet, but i plan on using it for some later functionality
+
   let key = "defaultPlayer"
-  let value = document.querySelector('#playerSearchInput').value;
+  let value = document.querySelector('.playerSearchInput').value;
   localStorage.setItem(key, value);
 
+  // Fetches the
   let url = 'https://sheltered-cove-87506.herokuapp.com/https://api.tracker.gg/api/v2/warzone/standard/search?platform=atvi&query=' + value + '&autocomplete=true ';
 
-  let searchData = fetch(url, {
-    mode: 'cors'
-  }).then(successFunction).catch(errorFunction)
+  function timeout(ms, promise) {
+    return new Promise((resolve, reject) => {
+      const timer = setTimeout(() => {
+        reject(new Error('TIMEOUT'))
+      }, ms)
+
+      promise
+        .then(value => {
+          clearTimeout(timer)
+          resolve(value)
+        })
+        .catch(reason => {
+          clearTimeout(timer)
+          reject(reason)
+        })
+    })
+  }
+
+  var searchData = timeout(1000, fetch(url, {mode: 'cors'})).then(function(response) {
+    successFunction(response)
+  }).catch(function(error) {
+    console.log(error)
+    errorFunction(error)
+  })
+
+
+
+  //let searchData = fetchWithTimeout(url, {mode: 'cors', timeout: 5000})
+  //  .then(successFunction)
+  //  .catch(errorFunction)
 
   function successFunction(searchResult) {
-    var ul = document.getElementById("searchList");
+    var ul = document.getElementsByClassName("searchList");
     ul.innerHTML = '';
     searchResult.json().then(
       function(searchResult) {
+        if (searchResult.data.length == 0) {
+          errorFunction("No results found")
+        }
         for (var i = 0; i < searchResult.data.length; i++) {
+          console.log('here too')
+          console.log(JSON.stringify(searchResult))
           console.log(JSON.stringify(searchResult.data[i].platformUserHandle))
           createSearchResult(JSON.stringify(searchResult.data[i].platformUserHandle))
           hideLoadScreen()
@@ -29,13 +65,24 @@ searchButton.addEventListener('click', function(evt) {
   }
 
   function errorFunction(err) {
+    hideLoadScreen()
+    var errorContent = document.getElementsByClassName("errorContent");
+    errorContent[0].innerHTML = ''
+    var h2 = document.createElement("h2")
+    h2.appendChild(document.createTextNode("Error"));
+    var p = document.createElement("p")
+    p.appendChild(document.createTextNode("The following error has occurred: " + err ));
+    errorContent[0].appendChild(h2);
+    errorContent[0].appendChild(p);
+    errorContent[0].style.display = "block";
     console.error(err)
+
   }
 
   function createSearchResult(player) {
     var unquotePlayer = player.replace(/"/g, '')
     var searchablePlayer = unquotePlayer.replace('#', '%23')
-    var ul = document.getElementById("searchList");
+    var ul = document.getElementsByClassName("searchList");
     var button = document.createElement("button")
     button.onclick = function(event) {
       displayLoadScreen()
@@ -43,7 +90,7 @@ searchButton.addEventListener('click', function(evt) {
       getPlayerStats(searchablePlayer);
     };
     button.appendChild(document.createTextNode(unquotePlayer));
-    ul.appendChild(button);
+    ul[0].appendChild(button);
   }
 
   function displayLoadScreen() {
@@ -52,6 +99,8 @@ searchButton.addEventListener('click', function(evt) {
     var searchContent = document.getElementsByClassName("searchContent");
     searchContent[0].style.display = "none";
     var statsContent = document.getElementsByClassName("statsContent");
+    statsContent[0].style.display = "none";
+    var statsContent = document.getElementsByClassName("errorContent");
     statsContent[0].style.display = "none";
     var loadingContent = document.getElementsByClassName("loadingContent");
     loadingContent[0].style.display = "block";
@@ -81,7 +130,7 @@ searchButton.addEventListener('click', function(evt) {
           statsContent.appendChild(h2);
 
           var lifetimeStatsArticle = document.createElement("article")
-          lifetimeStatsArticle.setAttribute("id", "lifetimeStats");
+          lifetimeStatsArticle.setAttribute("class", "lifetimeStats");
           var h3 = document.createElement("h3")
           h3.appendChild(document.createTextNode("Lifetime Stats"));
 

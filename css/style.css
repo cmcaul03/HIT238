@@ -22,12 +22,17 @@ section.loadingContent {
   color: white;
 }
 
-section.initialContent p {
+section.initialContent p,
+section.errorContent p {
   padding-left: 5%;
   padding-right: 5%;
 }
 
-section.initialContent, section.searchContent, section.statsContent, section.loadingContent {
+section.initialContent,
+section.searchContent,
+section.statsContent,
+section.errorContent,
+section.loadingContent {
   margin: 20px 1%;
   color: #CCCCCC;
   background-color: #2f3136;
@@ -58,7 +63,10 @@ section.statsContent article div {
   padding: 10px;
 }
 
-section.searchContent, section.statsContent, section.loadingContent {
+section.searchContent,
+section.statsContent,
+section.loadingContent,
+section.errorContent {
   display: none;
   width: auto;
 }

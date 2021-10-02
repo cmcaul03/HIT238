@@ -25,7 +25,7 @@
     <header>
       <img src="images/ws_logo.png" alt="Warzone Stats Logo" class="logo">
       <form>
-        <input id="playerSearchInput" type="text" placeholder="Search for player..." name="playerSearch">
+        <input class="playerSearchInput" type="text" placeholder="Search for player..." name="playerSearch">
         <button id="searchButton" aria-label="Search for player" type="submit"><i class="fa fa-search"></i></button>
       </form>
     </header>
@@ -37,13 +37,15 @@
       </section>
       <section class="searchContent">
         <h2>Search Results</h2>
-        <ul id="searchList">
+        <ul class="searchList">
         </ul>
       </section>
       <section class="statsContent">
       </section>
       <section class="loadingContent">
               <div class="loader"></div>
+      </section>
+      <section class="errorContent">
       </section>
     </main>
   </body>
