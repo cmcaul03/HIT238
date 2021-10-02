@@ -51,8 +51,6 @@ searchButton.addEventListener('click', function(evt) {
           errorFunction("No results found")
         }
         for (var i = 0; i < searchResult.data.length; i++) {
-          console.log(JSON.stringify(searchResult))
-          console.log(JSON.stringify(searchResult.data[i].platformUserHandle))
           createSearchResult(JSON.stringify(searchResult.data[i].platformUserHandle))
           hideLoadScreen()
           var searchContent = document.getElementsByClassName("searchContent");
@@ -82,7 +80,6 @@ searchButton.addEventListener('click', function(evt) {
     var button = document.createElement("button")
     button.onclick = function(event) {
       displayLoadScreen()
-      console.log(player);
       getPlayerStats(searchablePlayer);
     };
     button.appendChild(document.createTextNode(unquotePlayer));
@@ -109,8 +106,6 @@ searchButton.addEventListener('click', function(evt) {
 
   function getPlayerStats(player){
     let statsUrl = 'https://sheltered-cove-87506.herokuapp.com/https://api.tracker.gg/api/v2/warzone/standard/profile/atvi/' + player;
-    console.log(statsUrl)
-
     let stats = fetch(statsUrl, {
       mode: 'cors'
     }).then(successFunction).catch(errorFunction)
@@ -122,7 +117,6 @@ searchButton.addEventListener('click', function(evt) {
           statsContent.innerHTML = '';
           var h2 = document.createElement("h2")
           h2.appendChild(document.createTextNode(player));
-          console.log(h2)
           statsContent.appendChild(h2);
 
           var lifetimeStatsArticle = document.createElement("article")
@@ -176,8 +170,6 @@ searchButton.addEventListener('click', function(evt) {
 
 
           statsContent.appendChild(lifetimeStatsArticle);
-
-          console.log(JSON.stringify(stats.data.segments[1].stats.kdRatio.value))
 
           hideLoadScreen()
           statsContent.style.display = "block";
