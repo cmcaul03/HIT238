@@ -41,6 +41,7 @@ section.loadingContent {
   height: 90%;
   padding-bottom: 28px;
   text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 section.statsContent article {
@@ -52,6 +53,7 @@ section.statsContent article {
   border-radius: 10px;
   padding: 8px;
   text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 h3 {
@@ -153,14 +155,11 @@ button {
   margin-bottom: 5px;
   border-radius: 10px;
   margin-top: 15px;
-}
-
-.searchContent ul button:active {
-  background-color: #1E1E1E;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .searchContent ul button:hover {
-  background-color: black;
+  background-color: #1e2024;
 }
 
 
