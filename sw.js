@@ -6,7 +6,6 @@ var urlsToCache = [
   'js/main.js',
   'index.html',
   '/',
-  '/HIT238/',
   'images/ws_logo.png'
 ];
 
