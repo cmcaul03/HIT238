@@ -5,6 +5,7 @@ var urlsToCache = [
   'css/style.css',
   'js/main.js',
   'index.html',
+  '/',
   'images/ws_logo.png'
 ];
 
