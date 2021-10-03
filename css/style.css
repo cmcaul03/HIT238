@@ -48,7 +48,7 @@ section.loadingContent {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-section.statsContent article {
+section.statsContent section {
   margin: 20px;
   color: #CCCCCC;
   background-color: #36393f;
@@ -64,7 +64,7 @@ h3 {
   text-align: left;
   padding-left: 30px;
 }
-section.statsContent article div {
+section.statsContent section div {
   text-align: center;
   padding: 10px;
 }

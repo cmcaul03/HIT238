@@ -1,3 +1,4 @@
+// Service worker registration
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
 	navigator.serviceWorker.register("sw.js").then(function(registration) {
@@ -15,6 +16,7 @@ searchButton.addEventListener('click', function(evt) {
   evt.preventDefault();
   displayLoadScreen()
 
+// Captures user input, and provides basic validation
   let value = document.querySelector('.playerSearchInput').value;
   if (value.length < 3) {
     errorFunction("Less than three characters entered in search input.\
@@ -24,6 +26,8 @@ searchButton.addEventListener('click', function(evt) {
 
   let url = 'https://sheltered-cove-87506.herokuapp.com/https://api.tracker.gg/api/v2/warzone/standard/search?platform=atvi&query=' + value + '&autocomplete=true ';
 
+// Creates new timeout function for fecth requests
+// Stolen from https://stackoverflow.com/questions/46946380/fetch-api-request-timeout
   function timeout(ms, promise) {
     return new Promise((resolve, reject) => {
       const timer = setTimeout(() => {
@@ -42,17 +46,12 @@ searchButton.addEventListener('click', function(evt) {
     })
   }
 
+// Searches for players based on user's input
   var searchData = timeout(5000, fetch(url, {mode: 'cors'})).then(function(response) {
     successFunction(response)
   }).catch(function(error) {
     errorFunction(error)
   })
-
-
-
-  //let searchData = fetchWithTimeout(url, {mode: 'cors', timeout: 5000})
-  //  .then(successFunction)
-  //  .catch(errorFunction)
 
   function successFunction(searchResult) {
     var ul = document.getElementsByClassName("searchList");
@@ -85,6 +84,7 @@ searchButton.addEventListener('click', function(evt) {
     console.error(err)
   }
 
+// Creates buttons for each player it is passed
   function createSearchResult(player) {
     var unquotePlayer = player.replace(/"/g, '')
     var searchablePlayer = unquotePlayer.replace('#', '%23')
@@ -98,6 +98,7 @@ searchButton.addEventListener('click', function(evt) {
     ul[0].appendChild(button);
   }
 
+// Hides all other screens and displays the loading screen
   function displayLoadScreen() {
     var initialContent = document.getElementsByClassName("initialContent");
     initialContent[0].style.display = "none";
@@ -111,11 +112,13 @@ searchButton.addEventListener('click', function(evt) {
     loadingContent[0].style.display = "block";
   }
 
+// Hides the loading screen
   function hideLoadScreen() {
     var loadingContent = document.getElementsByClassName("loadingContent");
     loadingContent[0].style.display = "none";
   }
 
+// Fetches and displays a single player's stats
   function getPlayerStats(player){
     let statsUrl = 'https://sheltered-cove-87506.herokuapp.com/https://api.tracker.gg/api/v2/warzone/standard/profile/atvi/' + player;
     let stats = fetch(statsUrl, {
@@ -131,8 +134,8 @@ searchButton.addEventListener('click', function(evt) {
           h2.appendChild(document.createTextNode(player));
           statsContent.appendChild(h2);
 
-          var lifetimeStatsArticle = document.createElement("article")
-          lifetimeStatsArticle.setAttribute("class", "lifetimeStats");
+          var lifetimeStatsSection = document.createElement("Section")
+          lifetimeStatsSection.setAttribute("class", "lifetimeStats");
           var h3 = document.createElement("h3")
           h3.appendChild(document.createTextNode("Lifetime Stats"));
 
@@ -172,16 +175,15 @@ searchButton.addEventListener('click', function(evt) {
           lifetimeWinRatioDiv = lifetimeWinRatio.appendChild(document.createElement("div"));
           lifetimeWinRatioDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.wlRatio.value))));
 
-          lifetimeStatsArticle.appendChild(h3)
-          lifetimeStatsArticle.appendChild(lifetimeKills)
-          lifetimeStatsArticle.appendChild(lifetimeDeaths)
-          lifetimeStatsArticle.appendChild(lifetimeKD)
-          lifetimeStatsArticle.appendChild(lifetimeMatches)
-          lifetimeStatsArticle.appendChild(lifetimeWins)
-          lifetimeStatsArticle.appendChild(lifetimeWinRatio)
+          lifetimeStatsSection.appendChild(h3)
+          lifetimeStatsSection.appendChild(lifetimeKills)
+          lifetimeStatsSection.appendChild(lifetimeDeaths)
+          lifetimeStatsSection.appendChild(lifetimeKD)
+          lifetimeStatsSection.appendChild(lifetimeMatches)
+          lifetimeStatsSection.appendChild(lifetimeWins)
+          lifetimeStatsSection.appendChild(lifetimeWinRatio)
 
-
-          statsContent.appendChild(lifetimeStatsArticle);
+          statsContent.appendChild(lifetimeStatsSection);
 
           hideLoadScreen()
           statsContent.style.display = "block";
