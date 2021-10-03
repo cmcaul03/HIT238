@@ -19,7 +19,8 @@ h2 {
 }
 
 header img  {
-	width: 90%;
+  width: 90%;
+  height: auto;
 }
 
 section.loadingContent {
