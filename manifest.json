@@ -1,0 +1,20 @@
+{
+    "name": "Warzone Stats",
+    "short_name": "WZ Stats",
+    "icons": [
+        {
+            "src": "images/ws_icon_small.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        },
+        {
+            "src": "images/ws_icon_large.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#1E1E1E",
+    "theme_color": "#2f3136"
+}
