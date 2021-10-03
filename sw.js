@@ -4,7 +4,7 @@ var CACHE_NAME = CACHE_TITLE + '-' + CACHE_VERSION;
 var urlsToCache = [
   'css/style.css',
   'js/main.js',
-  '/index.html',
+  'index.html',
   'images/ws_logo.png'
 ];
 
