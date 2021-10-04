@@ -89,13 +89,16 @@ searchButton.addEventListener('click', function(evt) {
     var unquotePlayer = player.replace(/"/g, '')
     var searchablePlayer = unquotePlayer.replace('#', '%23')
     var ul = document.getElementsByClassName("searchList");
+    var li = document.createElement("li")
+
     var button = document.createElement("button")
     button.onclick = function(event) {
       displayLoadScreen()
       getPlayerStats(searchablePlayer);
     };
     button.appendChild(document.createTextNode(unquotePlayer));
-    ul[0].appendChild(button);
+    li.appendChild(button)
+    ul[0].appendChild(li);
   }
 
 // Hides all other screens and displays the loading screen
