@@ -20,7 +20,8 @@ h2 {
 
 h3 {
   text-align: left;
-  padding-left: 30px;
+  padding-left: 3%;
+  margin-left: 10px;
   margin-bottom: 0px;
 }
 
@@ -76,6 +77,19 @@ section.statsContent section div {
 
 section.statsContent section div p {
   margin: 5px;
+  display: inline;
+}
+
+section.statsContent section div u {
+  display: block;
+}
+
+section.statsContent section div i.fa-arrow-circle-up {
+  color: green;
+}
+
+section.statsContent section div i.fa-arrow-circle-down {
+  color: red;
 }
 
 section.searchContent,
