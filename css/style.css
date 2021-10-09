@@ -18,6 +18,12 @@ h2 {
   color: #6A9FC8;
 }
 
+h3 {
+  text-align: left;
+  padding-left: 30px;
+  margin-bottom: 0px;
+}
+
 header img  {
   width: 90%;
   height: auto;
@@ -44,6 +50,7 @@ section.loadingContent {
   border-radius: 10px;
   float: none;
   height: 90%;
+  overflow: scroll;
   padding-bottom: 28px;
   text-align: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -57,17 +64,18 @@ section.statsContent section {
   padding-bottom: 14px;
   border-radius: 10px;
   padding: 8px;
-  text-align: center;
+  text-align: left;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-h3 {
-  text-align: left;
-  padding-left: 30px;
-}
 section.statsContent section div {
-  text-align: center;
+  text-align: left;
+  margin-left: 3%;
   padding: 10px;
+}
+
+section.statsContent section div p {
+  margin: 5px;
 }
 
 section.searchContent,

@@ -145,37 +145,37 @@ searchButton.addEventListener('click', function(evt) {
           var lifetimeKD = document.createElement("div")
           lifetimeKDHeaderU = lifetimeKD.appendChild(document.createElement("U"));
           lifetimeKDHeaderU.appendChild(document.createTextNode("KD:"));
-          lifetimeKDDiv = lifetimeKD.appendChild(document.createElement("div"));
+          lifetimeKDDiv = lifetimeKD.appendChild(document.createElement("p"));
           lifetimeKDDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.kdRatio.value))));
 
           var lifetimeKills = document.createElement("div")
           lifetimeKillsHeaderU = lifetimeKills.appendChild(document.createElement("U"));
           lifetimeKillsHeaderU.appendChild(document.createTextNode("Kills:"));
-          lifetimeKillsDiv = lifetimeKills.appendChild(document.createElement("div"));
+          lifetimeKillsDiv = lifetimeKills.appendChild(document.createElement("p"));
           lifetimeKillsDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.kills.value))));
 
           var lifetimeDeaths = document.createElement("div")
           lifetimeDeathsHeaderU = lifetimeDeaths.appendChild(document.createElement("U"));
           lifetimeDeathsHeaderU.appendChild(document.createTextNode("Deaths:"));
-          lifetimeDeathsDiv = lifetimeDeaths.appendChild(document.createElement("div"));
+          lifetimeDeathsDiv = lifetimeDeaths.appendChild(document.createElement("p"));
           lifetimeDeathsDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.deaths.value))));
 
           var lifetimeMatches = document.createElement("div")
           lifetimeMatchesHeaderU = lifetimeMatches.appendChild(document.createElement("U"));
           lifetimeMatchesHeaderU.appendChild(document.createTextNode("Matches:"));
-          lifetimeMatchesDiv = lifetimeMatches.appendChild(document.createElement("div"));
+          lifetimeMatchesDiv = lifetimeMatches.appendChild(document.createElement("p"));
           lifetimeMatchesDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.gamesPlayed.value))));
 
           var lifetimeWins = document.createElement("div")
           lifetimeWinsHeaderU = lifetimeWins.appendChild(document.createElement("U"));
           lifetimeWinsHeaderU.appendChild(document.createTextNode("Wins:"));
-          lifetimeWinsDiv = lifetimeWins.appendChild(document.createElement("div"));
+          lifetimeWinsDiv = lifetimeWins.appendChild(document.createElement("p"));
           lifetimeWinsDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.wins.value))));
 
           var lifetimeWinRatio = document.createElement("div")
           lifetimeWinRatioHeaderU = lifetimeWinRatio.appendChild(document.createElement("U"));
           lifetimeWinRatioHeaderU.appendChild(document.createTextNode("Win Ratio:"));
-          lifetimeWinRatioDiv = lifetimeWinRatio.appendChild(document.createElement("div"));
+          lifetimeWinRatioDiv = lifetimeWinRatio.appendChild(document.createElement("p"));
           lifetimeWinRatioDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.wlRatio.value))));
 
           lifetimeStatsSection.appendChild(h3)
@@ -187,6 +187,52 @@ searchButton.addEventListener('click', function(evt) {
           lifetimeStatsSection.appendChild(lifetimeWinRatio)
 
           statsContent.appendChild(lifetimeStatsSection);
+
+
+          var weeklyStatsSection = document.createElement("Section")
+          weeklyStatsSection.setAttribute("class", "weeklyStats");
+          var h3 = document.createElement("h3")
+          h3.appendChild(document.createTextNode("Weekly Stats"));
+
+
+          var weeklyKDValue = (JSON.stringify(stats.data.segments[1].stats.weeklyKdRatio.value))
+          var weeklyKDValue = parseFloat(weeklyKDValue).toFixed(2)
+
+          var weeklyDeathsValue = parseFloat(((JSON.stringify(stats.data.segments[1].stats.weeklyKills.value)))/weeklyKDValue)
+          var weeklyDeathsValue = Math.round(weeklyDeathsValue)
+
+          if (weeklyDeathsValue == '0') {
+            var weeklyDeathsOneValue = '1'
+          } else {
+            var weeklyDeathsOneValue = weeklyDeathsValue
+          }
+
+
+
+          var weeklyDeaths = document.createElement("div")
+          weeklyDeathsHeaderU = weeklyDeaths.appendChild(document.createElement("U"));
+          weeklyDeathsHeaderU.appendChild(document.createTextNode("Weekly Deaths:"));
+          weeklyDeathsDiv = weeklyDeaths.appendChild(document.createElement("p"));
+          weeklyDeathsDiv.appendChild(document.createTextNode(weeklyDeathsOneValue));
+
+          var weeklyKills = document.createElement("div")
+          weeklyKillsHeaderU = weeklyKills.appendChild(document.createElement("U"));
+          weeklyKillsHeaderU.appendChild(document.createTextNode("Weekly Kills:"));
+          weeklyKillsDiv = weeklyKills.appendChild(document.createElement("p"));
+          weeklyKillsDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.weeklyKills.value))));
+
+          var weeklyKD = document.createElement("div")
+          weeklyKDHeaderU = weeklyKD.appendChild(document.createElement("U"));
+          weeklyKDHeaderU.appendChild(document.createTextNode("Weekly KD:"));
+          weeklyKDDiv = weeklyKD.appendChild(document.createElement("p"));
+          weeklyKDDiv.appendChild(document.createTextNode(weeklyKDValue));
+
+          weeklyStatsSection.appendChild(h3)
+          weeklyStatsSection.appendChild(weeklyKills)
+          weeklyStatsSection.appendChild(weeklyDeaths)
+          weeklyStatsSection.appendChild(weeklyKD)
+
+          statsContent.appendChild(weeklyStatsSection);
 
           hideLoadScreen()
           statsContent.style.display = "block";
