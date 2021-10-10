@@ -249,10 +249,45 @@ searchButton.addEventListener('click', function(evt) {
 
           statsContent.appendChild(weeklyStatsSection);
 
+          var recentGamesH2 = document.createElement("h2")
+          recentGamesH2.appendChild(document.createTextNode("Recent Games"));
+          statsContent.appendChild(recentGamesH2);
+
+          var recentGamesSection = document.createElement("Section")
+          recentGamesSection.setAttribute("class", "recentGames");
+          var loaderDiv = document.createElement("div")
+          loaderDiv.setAttribute("class", "loader");
+          recentGamesSection.appendChild(loaderDiv)
+
+          statsContent.appendChild(recentGamesSection);
+
           hideLoadScreen()
           statsContent.style.display = "block";
+          getPlayerGames(player)
         }).catch(errorFunction)
     }
   }
+
+  function getPlayerGames(player) {
+    let matchesUrl = 'https://sheltered-cove-87506.herokuapp.com/https://api.tracker.gg/api/v2/warzone/matches/atvi/' + player;
+    let matches = fetch(matchesUrl, {
+      mode: 'cors'
+    }).then(successFunction).catch(errorFunction)
+
+    function successFunction(matches) {
+      matches.json().then(
+        function(matches) {
+          var matches = matches.data.matches
+          console.log(matches.length)
+          for (var i = 0; i < matches.length; i++) {
+            console.log(matches[i])
+          }
+
+          var loaderDiv = document.getElementsByClassName("loader")
+          console.log(loaderDiv)
+          loaderDiv[0].style.display = "none";
+        }).catch(errorFunction)
+     }
+   }
 
 })
