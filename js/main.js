@@ -144,66 +144,34 @@ searchButton.addEventListener('click', function(evt) {
           var h3 = document.createElement("h3")
           h3.appendChild(document.createTextNode("Lifetime Stats"));
 
-          var lifetimeKD = document.createElement("div")
-          lifetimeKDHeaderU = lifetimeKD.appendChild(document.createElement("U"));
-          lifetimeKDHeaderU.appendChild(document.createTextNode("KD:"));
-          lifetimeKDDiv = lifetimeKD.appendChild(document.createElement("p"));
-          lifetimeKDDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.kdRatio.value))));
-
-          var lifetimeKills = document.createElement("div")
-          lifetimeKillsHeaderU = lifetimeKills.appendChild(document.createElement("U"));
-          lifetimeKillsHeaderU.appendChild(document.createTextNode("Kills:"));
-          lifetimeKillsDiv = lifetimeKills.appendChild(document.createElement("p"));
-          lifetimeKillsDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.kills.value))));
-
-          var lifetimeDeaths = document.createElement("div")
-          lifetimeDeathsHeaderU = lifetimeDeaths.appendChild(document.createElement("U"));
-          lifetimeDeathsHeaderU.appendChild(document.createTextNode("Deaths:"));
-          lifetimeDeathsDiv = lifetimeDeaths.appendChild(document.createElement("p"));
-          lifetimeDeathsDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.deaths.value))));
-
-          var lifetimeMatches = document.createElement("div")
-          lifetimeMatchesHeaderU = lifetimeMatches.appendChild(document.createElement("U"));
-          lifetimeMatchesHeaderU.appendChild(document.createTextNode("Matches:"));
-          lifetimeMatchesDiv = lifetimeMatches.appendChild(document.createElement("p"));
-          lifetimeMatchesDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.gamesPlayed.value))));
-
-          var lifetimeWins = document.createElement("div")
-          lifetimeWinsHeaderU = lifetimeWins.appendChild(document.createElement("U"));
-          lifetimeWinsHeaderU.appendChild(document.createTextNode("Wins:"));
-          lifetimeWinsDiv = lifetimeWins.appendChild(document.createElement("p"));
-          lifetimeWinsDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.wins.value))));
-
-          var lifetimeWinRatio = document.createElement("div")
-          lifetimeWinRatioHeaderU = lifetimeWinRatio.appendChild(document.createElement("U"));
-          lifetimeWinRatioHeaderU.appendChild(document.createTextNode("Win Ratio:"));
-          lifetimeWinRatioDiv = lifetimeWinRatio.appendChild(document.createElement("p"));
-          lifetimeWinRatioDiv.appendChild(document.createTextNode((JSON.stringify(stats.data.segments[1].stats.wlRatio.value))));
+          var lifetimeKD = createStatDiv("KD", (JSON.stringify(stats.data.segments[1].stats.kills.value)))
+          var lifetimeKills = createStatDiv("Kills", (JSON.stringify(stats.data.segments[1].stats.kills.value)))
+          var lifetimeDeaths = createStatDiv("Deaths", (JSON.stringify(stats.data.segments[1].stats.deaths.value)))
+          var lifetimegames = createStatDiv("Games", (JSON.stringify(stats.data.segments[1].stats.gamesPlayed.value)))
+          var lifetimeWins = createStatDiv("Wins", (JSON.stringify(stats.data.segments[1].stats.wins.value)))
+          var lifetimeWinRatio = createStatDiv("Win Ratio", (JSON.stringify(stats.data.segments[1].stats.wlRatio.value)))
 
           lifetimeStatsSection.appendChild(h3)
           lifetimeStatsSection.appendChild(lifetimeKills)
           lifetimeStatsSection.appendChild(lifetimeDeaths)
           lifetimeStatsSection.appendChild(lifetimeKD)
-          lifetimeStatsSection.appendChild(lifetimeMatches)
+          lifetimeStatsSection.appendChild(lifetimegames)
           lifetimeStatsSection.appendChild(lifetimeWins)
           lifetimeStatsSection.appendChild(lifetimeWinRatio)
 
           statsContent.appendChild(lifetimeStatsSection);
-
 
           var weeklyStatsSection = document.createElement("Section")
           weeklyStatsSection.setAttribute("class", "weeklyStats");
           var h3 = document.createElement("h3")
           h3.appendChild(document.createTextNode("Weekly Stats"));
 
-
           var weeklyKDValue = (JSON.stringify(stats.data.segments[1].stats.weeklyKdRatio.value))
           var weeklyKDValue = parseFloat(weeklyKDValue).toFixed(2)
-
           var weeklyDeathsValue = parseFloat(((JSON.stringify(stats.data.segments[1].stats.weeklyKills.value))) / weeklyKDValue)
           var weeklyDeathsValue = Math.round(weeklyDeathsValue)
-
           var weeklyKillsValue = (JSON.stringify(stats.data.segments[1].stats.weeklyKills.value))
+          var weeklyGamesValue = (JSON.stringify(stats.data.segments[1].stats.weeklyMatchesPlayed.value))
 
           if (weeklyKillsValue == 'null') {
             console.log('here')
@@ -212,23 +180,10 @@ searchButton.addEventListener('click', function(evt) {
             var weeklyKDValue = 'N/A';
           }
 
-          var weeklyDeaths = document.createElement("div")
-          weeklyDeathsHeaderU = weeklyDeaths.appendChild(document.createElement("U"));
-          weeklyDeathsHeaderU.appendChild(document.createTextNode("Weekly Deaths:"));
-          weeklyDeathsDiv = weeklyDeaths.appendChild(document.createElement("p"));
-          weeklyDeathsDiv.appendChild(document.createTextNode(weeklyDeathsValue));
-
-          var weeklyKills = document.createElement("div")
-          weeklyKillsHeaderU = weeklyKills.appendChild(document.createElement("U"));
-          weeklyKillsHeaderU.appendChild(document.createTextNode("Weekly Kills:"));
-          weeklyKillsDiv = weeklyKills.appendChild(document.createElement("p"));
-          weeklyKillsDiv.appendChild(document.createTextNode(weeklyKillsValue));
-
-          var weeklyKD = document.createElement("div")
-          weeklyKDHeaderU = weeklyKD.appendChild(document.createElement("U"));
-          weeklyKDHeaderU.appendChild(document.createTextNode("Weekly KD:"));
-          weeklyKDDiv = weeklyKD.appendChild(document.createElement("p"));
-          weeklyKDDiv.appendChild(document.createTextNode(weeklyKDValue));
+          var weeklyDeaths = createStatDiv("Weekly Deaths", weeklyDeathsValue)
+          var weeklyKills = createStatDiv("Weekly Kills", weeklyKillsValue)
+          var weeklyKD = createStatDiv("Weekly KD", weeklyKDValue)
+          var weeklyGames = createStatDiv("Weekly Games", weeklyGamesValue)
 
           if (weeklyKDValue == ('N/A')) {
             console.log("N/A")
@@ -246,13 +201,121 @@ searchButton.addEventListener('click', function(evt) {
           weeklyStatsSection.appendChild(weeklyKills)
           weeklyStatsSection.appendChild(weeklyDeaths)
           weeklyStatsSection.appendChild(weeklyKD)
+          weeklyStatsSection.appendChild(weeklyGames)
 
           statsContent.appendChild(weeklyStatsSection);
 
+          var recentGamesH2 = document.createElement("h2")
+          recentGamesH2.appendChild(document.createTextNode("Recent Games"));
+          statsContent.appendChild(recentGamesH2);
+
+          var recentGamesSection = document.createElement("Section")
+          recentGamesSection.setAttribute("class", "recentGames");
+          var loaderDiv = document.createElement("div")
+          loaderDiv.setAttribute("class", "loader");
+          recentGamesSection.appendChild(loaderDiv)
+
+          statsContent.appendChild(recentGamesSection);
+
           hideLoadScreen()
           statsContent.style.display = "block";
+          getPlayerGames(player)
         }).catch(errorFunction)
     }
   }
+
+  function getPlayerGames(player) {
+    let gamesUrl = 'https://sheltered-cove-87506.herokuapp.com/https://api.tracker.gg/api/v2/warzone/matches/atvi/' + player;
+    let games = fetch(gamesUrl, {
+      mode: 'cors'
+    }).then(successFunction).catch(errorFunction)
+
+    function successFunction(games) {
+      games.json().then(
+        function(games) {
+          var games = games.data.matches
+          for (var i = 0; i < games.length; i++) {
+            createRecentGame(games[i]);
+          }
+          var recentGamesSection = document.getElementsByClassName("recentGames")
+          recentGamesSection[0].style.display = "none";
+        }).catch(errorFunction)
+     }
+   }
+  function createRecentGame(game) {
+    var statsContent = document.getElementsByClassName("statsContent")[0];
+    var recentGameSection = document.createElement("Section")
+    var recentGameSectionDiv = document.createElement("Div")
+    recentGameSectionDiv.setAttribute("class", "recentGame")
+
+    gametime = game.metadata.timestamp
+    gametimeP = recentGameSectionDiv.appendChild(document.createElement("p"));
+    gametimeP.appendChild(document.createTextNode(timestampToDateTime(gametime)));
+
+    gameMode = game.metadata.modeName
+    gameModeP = recentGameSectionDiv.appendChild(document.createElement("p"));
+    gameModeP.appendChild(document.createTextNode(gameMode));
+
+    gamePlacement = game.segments[0].stats.placement.value
+    gamePlacementP = recentGameSectionDiv.appendChild(document.createElement("p"));
+    gamePlacementP.appendChild(document.createTextNode(toOrdinalSuffix(gamePlacement)));
+
+    gameKills = game.segments[0].stats.kills.value
+    gameDeaths = game.segments[0].stats.deaths.value
+    gameKD = game.segments[0].stats.kdRatio.value
+    gameDamage = game.segments[0].stats.damageDone.value
+
+    var recentGameStatDiv = document.createElement("Div")
+    recentGameStatDiv.setAttribute("class", "recentGameStats")
+
+    recentGameSection.appendChild(recentGameSectionDiv)
+    recentGameStatDiv.appendChild(createStatDiv("Kills", gameKills))
+    recentGameStatDiv.appendChild(createStatDiv("Deaths", gameDeaths))
+    recentGameStatDiv.appendChild(createStatDiv("Damage", gameDamage))
+    recentGameStatDiv.appendChild(createStatDiv("KD", parseFloat(gameKD).toFixed(2)))
+    recentGameSection.appendChild(recentGameStatDiv)
+
+    if (gamePlacement == ('1')) {
+      gamePlacementP.setAttribute("class", "won")
+    } else if (gamePlacement < 10) {
+      gamePlacementP.setAttribute("class", "top-ten");
+    } else {
+      gamePlacementP.setAttribute("class", "low");
+    }
+
+    recentGameSection.setAttribute("class", "recentGame");
+    statsContent.appendChild(recentGameSection);
+  }
+
+  const toOrdinalSuffix = num => {
+  const int = parseInt(num),
+    digits = [int % 10, int % 100],
+    ordinals = ['st', 'nd', 'rd', 'th'],
+    oPattern = [1, 2, 3, 4],
+    tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
+  return oPattern.includes(digits[0]) && !tPattern.includes(digits[1])
+    ? int + ordinals[digits[0] - 1]
+    : int + ordinals[3];
+  };
+
+  function timestampToDateTime(timestamp) {
+    var timestamp = Date.parse(timestamp)
+    var date = new Date(parseInt(timestamp));
+
+    return(date.getDate()+
+          "/"+(date.getMonth()+1)+
+          "/"+(date.getFullYear()).toString().substr(-2)+
+          " "+date.getHours()+
+          ":"+('0'+date.getMinutes()).slice(-2));
+  };
+
+  function createStatDiv(header, value) {
+    var stat = document.createElement("div")
+    u = stat.appendChild(document.createElement("U"));
+    u.appendChild(document.createTextNode(header + ":"));
+    div = stat.appendChild(document.createElement("p"));
+    div.appendChild(document.createTextNode(value));
+    return stat;
+  };
 
 })
