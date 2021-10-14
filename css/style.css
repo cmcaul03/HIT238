@@ -145,7 +145,7 @@ section.statsContent section.recentGame p {
   margin-bottom: 0px;
 }
 
-section.statsContent section.recentGame p:first-child {
+section.statsContent section.recentGame p:nth-child(2) {
   width: 50%;
 }
 

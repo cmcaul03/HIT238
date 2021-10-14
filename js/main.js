@@ -248,13 +248,13 @@ searchButton.addEventListener('click', function(evt) {
     var recentGameSectionDiv = document.createElement("Div")
     recentGameSectionDiv.setAttribute("class", "recentGame")
 
-    gametime = game.metadata.timestamp
-    gametimeP = recentGameSectionDiv.appendChild(document.createElement("p"));
-    gametimeP.appendChild(document.createTextNode(timestampToDateTime(gametime)));
-
     gameMode = game.metadata.modeName
     gameModeP = recentGameSectionDiv.appendChild(document.createElement("p"));
     gameModeP.appendChild(document.createTextNode(gameMode));
+
+    gametime = game.metadata.timestamp
+    gametimeP = recentGameSectionDiv.appendChild(document.createElement("p"));
+    gametimeP.appendChild(document.createTextNode(timestampToDateTime(gametime)));
 
     gamePlacement = game.segments[0].stats.placement.value
     gamePlacementP = recentGameSectionDiv.appendChild(document.createElement("p"));
