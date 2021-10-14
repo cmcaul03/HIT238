@@ -76,7 +76,6 @@ section.statsContent section div {
 }
 
 section.statsContent section div p {
-  margin: 5px;
   display: inline;
 }
 
@@ -84,8 +83,18 @@ section.statsContent section div u {
   display: block;
 }
 
-section.statsContent section div i.fa-arrow-circle-up {
-  color: green;
+section.statsContent section div i.fa-arrow-circle-up,
+section.statsContent section p.won {
+  padding-left: 5px;
+  color: #5a955a;
+}
+
+section.statsContent section p.top-ten {
+  color: #6A9FC8;
+}
+
+section.statsContent section p.low {
+  color: orange;
 }
 
 section.statsContent section div i.fa-arrow-circle-down {
@@ -103,7 +112,6 @@ section.errorContent {
 section.loadingContent {
   padding-top: 5%;
 }
-
 
 section.initialContent {
   display: block;
@@ -125,6 +133,34 @@ section.statsContent section div.loader {
   width: 80px;
   height: 80px;
   display: block;
+}
+section.statsContent section.recentGame {
+  font-size: 14px;
+}
+
+section.statsContent section.recentGame p {
+  width: 25%;
+  padding-right: 10px;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+section.statsContent section.recentGame p:first-child {
+  width: 50%;
+}
+
+section.statsContent section.recentGame div {
+  width: 100%;
+  padding: 0px;
+  padding-right: 15px;
+  margin-left: 0%;
+  padding-top: 5px;
+}
+
+section.statsContent section.recentGame div.recentGameStats,
+section.statsContent section.recentGame div.recentGame {
+  display: flex;
+  padding-left: 5%;
 }
 
 @keyframes spin {
@@ -204,4 +240,19 @@ button {
   	width: 50%;
     margin: auto;
   }
+
+	::-webkit-scrollbar {
+		width: 12px;
+	}
+
+	::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		border-radius: 10px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+	}
+
 }
