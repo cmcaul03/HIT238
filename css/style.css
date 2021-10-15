@@ -172,6 +172,14 @@ section.statsContent section.recentGame div.recentGame {
   100% { transform: rotate(360deg); }
 }
 
+section.statsContent section div.error {
+  text-align: center;
+}
+
+section.statsContent section div.error h2 {
+  color: red;
+}
+
 div {
     display: inline-block;
 }

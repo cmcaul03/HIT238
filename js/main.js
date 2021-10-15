@@ -328,10 +328,10 @@ function getPlayerStats(player) {
 }
 
 function getPlayerGames(player) {
-  let gamesUrl = 'https://sheltered-cove-87506.herokuapp.com/https://api.tracker.gg/api/v2/warzone/matches/atvi/' + player;
+  let gamesUrl = 'https://sheltered-cove-87506.herokuapp.com/https://api.tracker.gg/api/v2/warzone/matches/atvi/aaa' + player;
   let games = fetch(gamesUrl, {
     mode: 'cors'
-  }).then(successFunction).catch(errorFunction)
+  }).then(successFunction).catch(recentGamesErrorFunction)
 
   function successFunction(games) {
     games.json().then(
@@ -342,9 +342,27 @@ function getPlayerGames(player) {
         }
         var recentGamesSection = document.getElementsByClassName("recentGames")
         recentGamesSection[0].style.display = "none";
-      }).catch(errorFunction)
+      }).catch(recentGamesErrorFunction)
    }
  }
+
+ function recentGamesErrorFunction(err) {
+   var recentGamesSection = document.getElementsByClassName("recentGames")
+   var errorDiv = document.createElement("div")
+   errorDiv.setAttribute("class", "error");
+   var h2 = document.createElement("h2")
+   h2.appendChild(document.createTextNode("Error"));
+   var p = document.createElement("p")
+   p.appendChild(document.createTextNode("Error getting recent games"));
+   errorDiv.appendChild(h2);
+   errorDiv.appendChild(p);
+   recentGamesSection[0].appendChild(errorDiv)
+
+   var loaderDiv = document.getElementsByClassName("loader")
+   loaderDiv[0].style.display = "none";
+   console.error(err)
+ }
+
 
 function createRecentGame(game) {
   var statsContent = document.getElementsByClassName("statsContent")[0];
