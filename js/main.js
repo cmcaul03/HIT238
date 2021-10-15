@@ -328,7 +328,7 @@ function getPlayerStats(player) {
 }
 
 function getPlayerGames(player) {
-  let gamesUrl = 'https://sheltered-cove-87506.herokuapp.com/https://api.tracker.gg/api/v2/warzone/matches/atvi/aaa' + player;
+  let gamesUrl = 'https://sheltered-cove-87506.herokuapp.com/https://api.tracker.gg/api/v2/warzone/matches/atvi/' + player;
   let games = fetch(gamesUrl, {
     mode: 'cors'
   }).then(successFunction).catch(recentGamesErrorFunction)
