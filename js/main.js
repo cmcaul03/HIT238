@@ -133,6 +133,13 @@ searchButton.addEventListener('click', function(evt) {
     function successFunction(stats) {
       stats.json().then(
         function(stats) {
+
+          if (localStorage.getItem("favouritesList") === null) {
+              var favouritesList = [];
+          } else {
+              var favouritesList = JSON.parse(localStorage.getItem("favouritesList"));
+          }
+
           var statsContent = document.getElementsByClassName("statsContent")[0];
           statsContent.innerHTML = '';
           var h2 = document.createElement("h2")
@@ -205,6 +212,28 @@ searchButton.addEventListener('click', function(evt) {
 
           statsContent.appendChild(weeklyStatsSection);
 
+          addFavouriteButton = document.createElement("button")
+          addFavouriteButton.appendChild(document.createTextNode("Add to Favourites"));
+          addFavouriteButton.setAttribute("id", "addFavouriteButton");
+          addFavouriteButton.setAttribute("type", "submit");
+
+          statsContent.appendChild(addFavouriteButton)
+
+          removeFavouriteButton = document.createElement("button")
+          removeFavouriteButton.appendChild(document.createTextNode("Remove from Favourites"));
+          removeFavouriteButton.setAttribute("id", "removeFavouriteButton");
+          removeFavouriteButton.setAttribute("type", "submit");
+
+          statsContent.appendChild(removeFavouriteButton)
+
+          if (favouritesList.indexOf(player) === -1) {
+            addFavouriteButton.style.display = "none";
+            removeFavouriteButton.style.display = "block";
+          } else {
+            removeFavouriteButton.style.display = "none";
+            addFavouriteButton.style.display = "block";
+          }
+
           var recentGamesH2 = document.createElement("h2")
           recentGamesH2.appendChild(document.createTextNode("Recent Games"));
           statsContent.appendChild(recentGamesH2);
@@ -220,6 +249,22 @@ searchButton.addEventListener('click', function(evt) {
           hideLoadScreen()
           statsContent.style.display = "block";
           getPlayerGames(player)
+
+          addFavouriteButton.addEventListener('click', function(evt) {
+            favouritesList.indexOf(player) === -1 ? favouritesList.push(player) : console.log("This item already exists");
+            localStorage.setItem("favouritesList", JSON.stringify(favouritesList));
+            addFavouriteButton.style.display = "none";
+            removeFavouriteButton.style.display = "block";
+          })
+
+          removeFavouriteButton.addEventListener('click', function(evt) {
+            var index = favouritesList.indexOf(player);
+            favouritesList.splice(index, 1);
+            localStorage.setItem("favouritesList", JSON.stringify(favouritesList));
+            removeFavouriteButton.style.display = "none";
+            addFavouriteButton.style.display = "block";
+          })
+
         }).catch(errorFunction)
     }
   }
