@@ -129,6 +129,7 @@ function errorFunction(err) {
 function createSearchResult(player) {
   var unquotePlayer = player.replace(/"/g, '')
   var searchablePlayer = unquotePlayer.replace('#', '%23')
+  var searchablePlayer = searchablePlayer.toLowerCase();
   var ul = document.getElementsByClassName("searchList");
   var li = document.createElement("li")
 
@@ -205,7 +206,7 @@ function getPlayerStats(player) {
         var h3 = document.createElement("h3")
         h3.appendChild(document.createTextNode("Lifetime Stats"));
 
-        var lifetimeKD = createStatDiv("KD", (JSON.stringify(stats.data.segments[1].stats.KdRatio.value)))
+        var lifetimeKD = createStatDiv("KD", (JSON.stringify(stats.data.segments[1].stats.kdRatio.value)))
         var lifetimeKills = createStatDiv("Kills", (JSON.stringify(stats.data.segments[1].stats.kills.value)))
         var lifetimeDeaths = createStatDiv("Deaths", (JSON.stringify(stats.data.segments[1].stats.deaths.value)))
         var lifetimegames = createStatDiv("Games", (JSON.stringify(stats.data.segments[1].stats.gamesPlayed.value)))
