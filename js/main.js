@@ -12,9 +12,9 @@ if ('serviceWorker' in navigator) {
 }
 
 if (localStorage.getItem("favouritesList") === null) {
-    var favouritesList = [];
+  var favouritesList = [];
 } else {
-    var favouritesList = JSON.parse(localStorage.getItem("favouritesList"));
+  var favouritesList = JSON.parse(localStorage.getItem("favouritesList"));
 }
 
 searchButton.addEventListener('click', function(evt) {
@@ -346,25 +346,25 @@ function getPlayerGames(player) {
         var recentGamesSection = document.getElementsByClassName("recentGames")
         recentGamesSection[0].style.display = "none";
       }).catch(recentGamesErrorFunction)
-   }
- }
+  }
+}
 
- function recentGamesErrorFunction(err) {
-   var recentGamesSection = document.getElementsByClassName("recentGames")
-   var errorDiv = document.createElement("div")
-   errorDiv.setAttribute("class", "error");
-   var h2 = document.createElement("h2")
-   h2.appendChild(document.createTextNode("Error"));
-   var p = document.createElement("p")
-   p.appendChild(document.createTextNode("Error getting recent games"));
-   errorDiv.appendChild(h2);
-   errorDiv.appendChild(p);
-   recentGamesSection[0].appendChild(errorDiv)
+function recentGamesErrorFunction(err) {
+  var recentGamesSection = document.getElementsByClassName("recentGames")
+  var errorDiv = document.createElement("div")
+  errorDiv.setAttribute("class", "error");
+  var h2 = document.createElement("h2")
+  h2.appendChild(document.createTextNode("Error"));
+  var p = document.createElement("p")
+  p.appendChild(document.createTextNode("Error getting recent games"));
+  errorDiv.appendChild(h2);
+  errorDiv.appendChild(p);
+  recentGamesSection[0].appendChild(errorDiv)
 
-   var loaderDiv = document.getElementsByClassName("loader")
-   loaderDiv[0].style.display = "none";
-   console.error(err)
- }
+  var loaderDiv = document.getElementsByClassName("loader")
+  loaderDiv[0].style.display = "none";
+  console.error(err)
+}
 
 
 function createRecentGame(game) {
@@ -417,9 +417,9 @@ function createLeaderboards() {
   var leaderboardContent = document.getElementsByClassName("leaderboardContent");
 
   if (localStorage.getItem("favouritesList") === null) {
-      var favouritesList = [];
+    var favouritesList = [];
   } else {
-      var favouritesList = JSON.parse(localStorage.getItem("favouritesList"));
+    var favouritesList = JSON.parse(localStorage.getItem("favouritesList"));
   }
 
   var lifetimeKDtable = document.createElement("table");
@@ -545,7 +545,7 @@ function createLeaderboards() {
           lifetimeKDtable.appendChild(lifetimeKDtr)
           lifetimeWinstable.appendChild(lifetimeWinstr)
           weeklyKDtable.appendChild(weeklyKDtr)
-      })
+        })
 
     }
   }
@@ -574,29 +574,29 @@ function createLeaderboards() {
 }
 
 const toOrdinalSuffix = num => {
-const int = parseInt(num),
-  digits = [int % 10, int % 100],
-  ordinals = ['st', 'nd', 'rd', 'th'],
-  oPattern = [1, 2, 3, 4],
-  tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
-return oPattern.includes(digits[0]) && !tPattern.includes(digits[1])
-  ? int + ordinals[digits[0] - 1]
-  : int + ordinals[3];
+  const int = parseInt(num),
+    digits = [int % 10, int % 100],
+    ordinals = ['st', 'nd', 'rd', 'th'],
+    oPattern = [1, 2, 3, 4],
+    tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
+  return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ?
+    int + ordinals[digits[0] - 1] :
+    int + ordinals[3];
 };
 
 function timestampToDateTime(timestamp) {
   var timestamp = Date.parse(timestamp)
   var date = new Date(parseInt(timestamp));
 
-  return(date.getDate()+
-        "/"+(date.getMonth()+1)+
-        "/"+(date.getFullYear()).toString().substr(-2)+
-        " "+date.getHours()+
-        ":"+('0'+date.getMinutes()).slice(-2));
+  return (date.getDate() +
+    "/" + (date.getMonth() + 1) +
+    "/" + (date.getFullYear()).toString().substr(-2) +
+    " " + date.getHours() +
+    ":" + ('0' + date.getMinutes()).slice(-2));
 };
 
 function getFirstPartPlayerName(str) {
-    return str.split('%')[0];
+  return str.split('%')[0];
 }
 
 function createStatDiv(header, value) {
