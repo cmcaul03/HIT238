@@ -68,9 +68,9 @@ var leaderboard = document.querySelector(".leaderboard");
 
 leaderboard.addEventListener("click", function(evt) {
   displayLoadScreen()
-  createLeaderboards()
   var leaderboardContent = document.getElementsByClassName("leaderboardContent");
-  hideLoadScreen()
+  leaderboardContent[0].innerHTML = '';
+  createLeaderboards()
   leaderboardContent[0].style.display = "block";
 })
 
@@ -199,7 +199,8 @@ function getPlayerStats(player) {
         var statsContent = document.getElementsByClassName("statsContent")[0];
         statsContent.innerHTML = '';
         var h2 = document.createElement("h2")
-        h2.appendChild(document.createTextNode(player));
+
+        h2.appendChild(document.createTextNode(getFirstPartPlayerName(player)));
         statsContent.appendChild(h2);
 
         var lifetimeStatsSection = document.createElement("Section")
@@ -412,6 +413,9 @@ function createRecentGame(game) {
 }
 
 function createLeaderboards() {
+
+  var leaderboardContent = document.getElementsByClassName("leaderboardContent");
+
   if (localStorage.getItem("favouritesList") === null) {
       var favouritesList = [];
   } else {
@@ -420,29 +424,62 @@ function createLeaderboards() {
 
   var lifetimeKDtable = document.createElement("table");
   lifetimeKDtable.setAttribute("class", "lifetimeKDtable");
-
   var lifetimeKDheaderRow = document.createElement("tr");
-
+  var lifetimeplayerheader = document.createElement("th")
   var lifetimeKillsheader = document.createElement("th")
   var lifetimeDeathsheader = document.createElement("th")
   var lifetimeKDheader = document.createElement("th")
-
+  lifetimeplayerheader.innerHTML = "Player"
   lifetimeKillsheader.innerHTML = "Kills"
   lifetimeDeathsheader.innerHTML = "Deaths"
   lifetimeKDheader.innerHTML = "KD"
-
+  lifetimeKDheaderRow.appendChild(lifetimeplayerheader)
   lifetimeKDheaderRow.appendChild(lifetimeKillsheader)
   lifetimeKDheaderRow.appendChild(lifetimeDeathsheader)
   lifetimeKDheaderRow.appendChild(lifetimeKDheader)
-
   lifetimeKDtable.appendChild(lifetimeKDheaderRow)
 
-  // favouritesList.forEach(createLeaderboardTables)
+  var lifetimeWinstable = document.createElement("table");
+  lifetimeWinstable.setAttribute("class", "lifetimeWinstable");
+  var lifetimeWinsheaderRow = document.createElement("tr");
+  var lifetimeWinsplayerheader = document.createElement("th")
+  var lifetimeGamesheader = document.createElement("th")
+  var lifetimeWinsheader = document.createElement("th")
+  var lifetimeWinRatioheader = document.createElement("th")
+  lifetimeWinsplayerheader.innerHTML = "Player"
+  lifetimeGamesheader.innerHTML = "Games"
+  lifetimeWinsheader.innerHTML = "Wins"
+  lifetimeWinRatioheader.innerHTML = "Win Ratio"
+  lifetimeWinsheaderRow.appendChild(lifetimeWinsplayerheader)
+  lifetimeWinsheaderRow.appendChild(lifetimeGamesheader)
+  lifetimeWinsheaderRow.appendChild(lifetimeWinsheader)
+  lifetimeWinsheaderRow.appendChild(lifetimeWinRatioheader)
+  lifetimeWinstable.appendChild(lifetimeWinsheaderRow)
+
+  var weeklyKDtable = document.createElement("table");
+  weeklyKDtable.setAttribute("class", "weeklyKDtable");
+  var weeklyKDheaderRow = document.createElement("tr");
+  var weeklyplayerheader = document.createElement("th")
+  var weeklyKillsheader = document.createElement("th")
+  var weeklyDeathsheader = document.createElement("th")
+  var weeklyKDheader = document.createElement("th")
+  weeklyplayerheader.innerHTML = "Player"
+  weeklyKillsheader.innerHTML = "Kills"
+  weeklyDeathsheader.innerHTML = "Deaths"
+  weeklyKDheader.innerHTML = "KD"
+  weeklyKDheaderRow.appendChild(weeklyplayerheader)
+  weeklyKDheaderRow.appendChild(weeklyKillsheader)
+  weeklyKDheaderRow.appendChild(weeklyDeathsheader)
+  weeklyKDheaderRow.appendChild(weeklyKDheader)
+  weeklyKDtable.appendChild(weeklyKDheaderRow)
+
 
   for (var i = 0; i < favouritesList.length; i++) {
     let player = favouritesList[i]
 
     let statsUrl = 'https://sheltered-cove-87506.herokuapp.com/https://api.tracker.gg/api/v2/warzone/standard/profile/atvi/' + player;
+
+    player = getFirstPartPlayerName(player)
 
     let stats = fetch(statsUrl, {
       mode: 'cors'
@@ -466,111 +503,74 @@ function createLeaderboards() {
           var lifetimeKDtr = document.createElement("tr")
           var lifetimeWinstr = document.createElement("tr")
           var weeklyKDtr = document.createElement("tr")
+          var lifetimeKDplayertd = document.createElement("td")
           var lifetimeKDtd = document.createElement("td")
           var lifetimeKillstd = document.createElement("td")
           var lifetimeDeathstd = document.createElement("td")
           var lifetimeGamestd = document.createElement("td")
           var lifetimeWinstd = document.createElement("td")
+          var lifetimeWinsplayertd = document.createElement("td")
           var lifetimeWinRatiotd = document.createElement("td")
           var weeklyKDValuetd = document.createElement("td")
+          var weeklyKDplayertd = document.createElement("td")
           var weeklyDeathsValuetd = document.createElement("td")
           var weeklyKillsValuetd = document.createElement("td")
 
+          lifetimeKDplayertd.innerHTML = player
           lifetimeKDtd.innerHTML = lifetimeKD
           lifetimeKillstd.innerHTML = lifetimeKills
           lifetimeDeathstd.innerHTML = lifetimeDeaths
           lifetimeGamestd.innerHTML = lifetimeGames
           lifetimeWinstd.innerHTML = lifetimeWins
+          lifetimeWinsplayertd.innerHTML = player
           lifetimeWinRatiotd.innerHTML = lifetimeWinRatio
           weeklyKDValuetd.innerHTML = weeklyKDValue
+          weeklyKDplayertd.innerHTML = player
           weeklyDeathsValuetd.innerHTML = weeklyDeathsValue
           weeklyKillsValuetd.innerHTML = weeklyKillsValue
 
-          lifetimeKDtr.appendChild(lifetimeKDtd)
+          lifetimeKDtr.appendChild(lifetimeKDplayertd)
           lifetimeKDtr.appendChild(lifetimeKillstd)
           lifetimeKDtr.appendChild(lifetimeDeathstd)
+          lifetimeKDtr.appendChild(lifetimeKDtd)
+          lifetimeWinstr.appendChild(lifetimeWinsplayertd)
           lifetimeWinstr.appendChild(lifetimeGamestd)
           lifetimeWinstr.appendChild(lifetimeWinstd)
           lifetimeWinstr.appendChild(lifetimeWinRatiotd)
-          weeklyKDtr.appendChild(weeklyKDValuetd)
-          weeklyKDtr.appendChild(weeklyDeathsValuetd)
+          weeklyKDtr.appendChild(weeklyKDplayertd)
           weeklyKDtr.appendChild(weeklyKillsValuetd)
+          weeklyKDtr.appendChild(weeklyDeathsValuetd)
+          weeklyKDtr.appendChild(weeklyKDValuetd)
 
           lifetimeKDtable.appendChild(lifetimeKDtr)
+          lifetimeWinstable.appendChild(lifetimeWinstr)
+          weeklyKDtable.appendChild(weeklyKDtr)
       })
 
     }
   }
 
-  console.log(lifetimeKDtable)
-}
+  var leaderboardSection = document.createElement("Section")
+  var leaderboardh2 = document.createElement("h2")
+  leaderboardh2.appendChild(document.createTextNode("Leaderboards"));
+  var lifetimeKDh3 = document.createElement("h3")
+  lifetimeKDh3.appendChild(document.createTextNode("Lifetime KD"));
+  var lifetimeWinsh3 = document.createElement("h3")
+  lifetimeWinsh3.appendChild(document.createTextNode("Lifetime Wins"));
+  var weeklyKDh3 = document.createElement("h3")
+  weeklyKDh3.appendChild(document.createTextNode("Weekly KD"));
 
-function createLeaderboardTables(player) {
+  leaderboardSection.appendChild(leaderboardh2)
+  leaderboardSection.appendChild(lifetimeKDh3)
+  leaderboardSection.appendChild(lifetimeKDtable)
+  leaderboardSection.appendChild(lifetimeWinsh3)
+  leaderboardSection.appendChild(lifetimeWinstable)
+  leaderboardSection.appendChild(weeklyKDh3)
+  leaderboardSection.appendChild(weeklyKDtable)
 
-  let statsUrl = 'https://sheltered-cove-87506.herokuapp.com/https://api.tracker.gg/api/v2/warzone/standard/profile/atvi/' + player;
+  leaderboardContent[0].appendChild(leaderboardSection);
+  hideLoadScreen()
 
-  let stats = fetch(statsUrl, {
-    mode: 'cors'
-  }).then(successFunction).catch(errorFunction)
-
-  function successFunction(stats) {
-    stats.json().then(
-      function(stats) {
-
-        var lifetimeKDtable = document.getElementsByClassName("lifetimeKDtable");
-
-        console.log(lifetimeKDtable[0])
-
-        var lifetimeKD = JSON.stringify(stats.data.segments[1].stats.kdRatio.value)
-        var lifetimeKills = JSON.stringify(stats.data.segments[1].stats.kills.value)
-        var lifetimeDeaths = JSON.stringify(stats.data.segments[1].stats.deaths.value)
-        var lifetimeGames = JSON.stringify(stats.data.segments[1].stats.gamesPlayed.value)
-        var lifetimeWins = JSON.stringify(stats.data.segments[1].stats.wins.value)
-        var lifetimeWinRatio = JSON.stringify(stats.data.segments[1].stats.wlRatio.value)
-
-        var weeklyKDValue = parseFloat((JSON.stringify(stats.data.segments[1].stats.weeklyKdRatio.value))).toFixed(2)
-        var weeklyDeathsValue = Math.round(parseFloat(((JSON.stringify(stats.data.segments[1].stats.weeklyKills.value))) / weeklyKDValue))
-        var weeklyKillsValue = (JSON.stringify(stats.data.segments[1].stats.weeklyKills.value))
-
-        var lifetimeKDtr = document.createElement("tr")
-        var lifetimeWinstr = document.createElement("tr")
-        var weeklyKDtr = document.createElement("tr")
-        var lifetimeKDtd = document.createElement("td")
-        var lifetimeKillstd = document.createElement("td")
-        var lifetimeDeathstd = document.createElement("td")
-        var lifetimeGamestd = document.createElement("td")
-        var lifetimeWinstd = document.createElement("td")
-        var lifetimeWinRatiotd = document.createElement("td")
-        var weeklyKDValuetd = document.createElement("td")
-        var weeklyDeathsValuetd = document.createElement("td")
-        var weeklyKillsValuetd = document.createElement("td")
-
-        lifetimeKDtd.innerHTML = lifetimeKD
-        lifetimeKillstd.innerHTML = lifetimeKills
-        lifetimeDeathstd.innerHTML = lifetimeDeaths
-        lifetimeGamestd.innerHTML = lifetimeGames
-        lifetimeWinstd.innerHTML = lifetimeWins
-        lifetimeWinRatiotd.innerHTML = lifetimeWinRatio
-        weeklyKDValuetd.innerHTML = weeklyKDValue
-        weeklyDeathsValuetd.innerHTML = weeklyDeathsValue
-        weeklyKillsValuetd.innerHTML = weeklyKillsValue
-
-        lifetimeKDtr.appendChild(lifetimeKDtd)
-        lifetimeKDtr.appendChild(lifetimeKillstd)
-        lifetimeKDtr.appendChild(lifetimeDeathstd)
-        lifetimeWinstr.appendChild(lifetimeGamestd)
-        lifetimeWinstr.appendChild(lifetimeWinstd)
-        lifetimeWinstr.appendChild(lifetimeWinRatiotd)
-        weeklyKDtr.appendChild(weeklyKDValuetd)
-        weeklyKDtr.appendChild(weeklyDeathsValuetd)
-        weeklyKDtr.appendChild(weeklyKillsValuetd)
-
-        lifetimeKDtable[0].appendChild(lifetimeKDtr)
-
-        console.log(lifetimeKDtable)
-
-      })
-  }
 }
 
 const toOrdinalSuffix = num => {
@@ -594,6 +594,10 @@ function timestampToDateTime(timestamp) {
         " "+date.getHours()+
         ":"+('0'+date.getMinutes()).slice(-2));
 };
+
+function getFirstPartPlayerName(str) {
+    return str.split('%')[0];
+}
 
 function createStatDiv(header, value) {
   var stat = document.createElement("div")

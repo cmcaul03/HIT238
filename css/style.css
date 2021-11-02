@@ -270,6 +270,23 @@ button {
   background-color: #1e2024;
 }
 
+
+table {
+      border-spacing: 0;
+      width: 95%;
+      border: 1px solid #ddd;
+      margin: 2.5%;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+}
+
+tr:nth-child(even) {
+  background-color: #222222
+}
+
 footer nav {
 	position:fixed;
 	bottom:0;
