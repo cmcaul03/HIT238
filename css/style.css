@@ -286,16 +286,23 @@ table {
   width: 95%;
   border: 1px solid #ddd;
   margin: 2.5%;
+  font-size: 14px;
 }
 
 th, td {
   text-align: left;
-  padding: 8px;
-  width: 25%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  width: auto;
+}
+
+tr:nth-child(1) {
+  background-color: #6A9FC8;
+  color: black;
 }
 
 tr:nth-child(even) {
-  background-color: #222222
+  background-color: #222222;
 }
 
 footer nav {
