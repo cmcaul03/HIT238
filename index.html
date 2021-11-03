@@ -1,79 +1,73 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="manifest" href="manifest.json">
-    <link
-      rel="preload"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript>
-        <link
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.cssp"
-            rel="stylesheet"
-            type="text/css"
-        />
-    </noscript>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="Description" content="Warzone Stats">
-    <meta name="theme-color" content="#2f3136">
-    <title>Warzone Stats</title>
-  </head>
-  <body>
-    <header>
-      <img src="images/ws_logo.png" alt="Warzone Stats Logo" class="logo" width="878" height="174">
-      <form>
-        <input class="playerSearchInput" type="text" placeholder="Search for player..." name="playerSearch">
-        <button id="searchButton" aria-label="Search for player" type="submit"><i class="fa fa-search"></i></button>
-      </form>
-    </header>
-    <main>
-      <section class="initialContent">
-        <h2>Getting Started</h2>
-        <p>Start by typing the gamertag of a player into the search bar above.</p>
-        <p>Click the search button and start analysing your stats! </p>
-      </section>
-      <section class="searchContent">
-        <h2>Search Results</h2>
-        <ul class="searchList">
-        </ul>
-      </section>
-      <section class="statsContent">
-      </section>
-      <section class="favouritesContent">
-        <h2>Favourites</h2>
-        <ul class="favouritesList">
-        </ul>
-      </section>
-      <section class="leaderboardContent">
-      </section>
-      <section class="loadingContent">
-        <h2>Loading...</h2>
-        <div class="loader"></div>
-      </section>
-      <section class="errorContent">
-      </section>
-    </main>
-    <footer>
-      <nav>
-      	<div class="favourites">
-          <i class="fa fa-star"></i>
-          <i>Favourites</i>
-      	</div>
-      	<div class="home">
-          <i class="fa fa-home"></i>
-          <i>Home</i>
-      	</div>
-      	<div class="leaderboard">
-          <i class="fa fa-users"></i>
-          <i>Leaderboard</i>
-      	</div>
-      </nav>
-    </footer>
-  </body>
-  <script type="text/javascript" src="js/main.js">
-  </script>
+
+<head>
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.cssp" rel="stylesheet" type="text/css" />
+  </noscript>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="Description" content="Warzone Stats">
+  <meta name="theme-color" content="#2f3136">
+  <title>Warzone Stats</title>
+</head>
+
+<body>
+  <header>
+    <img src="images/ws_logo.png" alt="Warzone Stats Logo" class="logo" width="878" height="174">
+    <form>
+      <input class="playerSearchInput" type="text" placeholder="Search for player..." name="playerSearch">
+      <button id="searchButton" aria-label="Search for player" type="submit"><i class="fa fa-search"></i></button>
+    </form>
+  </header>
+  <main>
+    <section class="initialContent">
+      <h2>Getting Started</h2>
+      <p>Start by typing the gamertag of a player into the search bar above.</p>
+      <p>Click the search button and start analysing your stats! </p>
+    </section>
+    <section class="searchContent">
+      <h2>Search Results</h2>
+      <ul class="searchList">
+      </ul>
+    </section>
+    <section class="statsContent">
+    </section>
+    <section class="favouritesContent">
+      <h2>Favourites</h2>
+      <ul class="favouritesList">
+      </ul>
+    </section>
+    <section class="leaderboardContent">
+    </section>
+    <section class="loadingContent">
+      <h2>Loading...</h2>
+      <div class="loader"></div>
+    </section>
+    <section class="errorContent">
+    </section>
+  </main>
+  <footer>
+    <nav>
+      <div class="favourites">
+        <i class="fa fa-star"></i>
+        <p>Favourites</p>
+      </div>
+      <div class="home">
+        <i class="fa fa-home"></i>
+        <p>Home</p>
+      </div>
+      <div class="leaderboard">
+        <i class="fa fa-users"></i>
+        <p>Leaderboards</p>
+      </div>
+    </nav>
+  </footer>
+</body>
+<script type="text/javascript" src="js/main.js">
+</script>
+
 </html>

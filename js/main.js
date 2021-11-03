@@ -75,7 +75,7 @@ leaderboard.addEventListener("click", function(evt) {
 })
 
 // Creates new timeout function for fecth requests
-// Stolen from https://stackoverflow.com/questions/46946380/fetch-api-request-timeout
+// Stolen and adapted from https://stackoverflow.com/questions/46946380/fetch-api-request-timeout
 function timeout(ms, promise) {
   return new Promise((resolve, reject) => {
     const timer = setTimeout(() => {
@@ -426,13 +426,25 @@ function createLeaderboards() {
   lifetimeKDtable.setAttribute("class", "lifetimeKDtable");
   var lifetimeKDheaderRow = document.createElement("tr");
   var lifetimeplayerheader = document.createElement("th")
+  lifetimeplayerheader.onclick = function(event) {
+    sortTable(0, lifetimeKDtable)
+  }
   var lifetimeKillsheader = document.createElement("th")
+  lifetimeKillsheader.onclick = function(event) {
+    sortTable(1, lifetimeKDtable)
+  }
   var lifetimeDeathsheader = document.createElement("th")
+  lifetimeDeathsheader.onclick = function(event) {
+    sortTable(2, lifetimeKDtable)
+  }
   var lifetimeKDheader = document.createElement("th")
-  lifetimeplayerheader.innerHTML = "Player"
-  lifetimeKillsheader.innerHTML = "Kills"
-  lifetimeDeathsheader.innerHTML = "Deaths"
-  lifetimeKDheader.innerHTML = "KD"
+  lifetimeKDheader.onclick = function(event) {
+    sortTable(3, lifetimeKDtable)
+  }
+  lifetimeplayerheader.innerHTML = "Player &#8597"
+  lifetimeKillsheader.innerHTML = "Kills &#8597"
+  lifetimeDeathsheader.innerHTML = "Deaths &#8597"
+  lifetimeKDheader.innerHTML = "KD &#8597"
   lifetimeKDheaderRow.appendChild(lifetimeplayerheader)
   lifetimeKDheaderRow.appendChild(lifetimeKillsheader)
   lifetimeKDheaderRow.appendChild(lifetimeDeathsheader)
@@ -443,13 +455,25 @@ function createLeaderboards() {
   lifetimeWinstable.setAttribute("class", "lifetimeWinstable");
   var lifetimeWinsheaderRow = document.createElement("tr");
   var lifetimeWinsplayerheader = document.createElement("th")
+  lifetimeWinsplayerheader.onclick = function(event) {
+    sortTable(0, lifetimeWinstable)
+  }
   var lifetimeGamesheader = document.createElement("th")
+  lifetimeGamesheader.onclick = function(event) {
+    sortTable(1, lifetimeWinstable)
+  }
   var lifetimeWinsheader = document.createElement("th")
+  lifetimeWinsheader.onclick = function(event) {
+    sortTable(2, lifetimeWinstable)
+  }
   var lifetimeWinRatioheader = document.createElement("th")
-  lifetimeWinsplayerheader.innerHTML = "Player"
-  lifetimeGamesheader.innerHTML = "Games"
-  lifetimeWinsheader.innerHTML = "Wins"
-  lifetimeWinRatioheader.innerHTML = "Win Ratio"
+  lifetimeWinRatioheader.onclick = function(event) {
+    sortTable(3, lifetimeWinstable)
+  }
+  lifetimeWinsplayerheader.innerHTML = "Player &#8597;"
+  lifetimeGamesheader.innerHTML = "Games &#8597"
+  lifetimeWinsheader.innerHTML = "Wins &#8597"
+  lifetimeWinRatioheader.innerHTML = "Win Ratio &#8597"
   lifetimeWinsheaderRow.appendChild(lifetimeWinsplayerheader)
   lifetimeWinsheaderRow.appendChild(lifetimeGamesheader)
   lifetimeWinsheaderRow.appendChild(lifetimeWinsheader)
@@ -460,13 +484,25 @@ function createLeaderboards() {
   weeklyKDtable.setAttribute("class", "weeklyKDtable");
   var weeklyKDheaderRow = document.createElement("tr");
   var weeklyplayerheader = document.createElement("th")
+  weeklyplayerheader.onclick = function(event) {
+    sortTable(0, weeklyKDtable)
+  }
   var weeklyKillsheader = document.createElement("th")
+  weeklyKillsheader.onclick = function(event) {
+    sortTable(1, weeklyKDtable)
+  }
   var weeklyDeathsheader = document.createElement("th")
+  weeklyDeathsheader.onclick = function(event) {
+    sortTable(2, weeklyKDtable)
+  }
   var weeklyKDheader = document.createElement("th")
-  weeklyplayerheader.innerHTML = "Player"
-  weeklyKillsheader.innerHTML = "Kills"
-  weeklyDeathsheader.innerHTML = "Deaths"
-  weeklyKDheader.innerHTML = "KD"
+  weeklyKDheader.onclick = function(event) {
+    sortTable(3, weeklyKDtable)
+  }
+  weeklyplayerheader.innerHTML = "Player &#8597"
+  weeklyKillsheader.innerHTML = "Kills &#8597"
+  weeklyDeathsheader.innerHTML = "Deaths &#8597"
+  weeklyKDheader.innerHTML = "KD &#8597"
   weeklyKDheaderRow.appendChild(weeklyplayerheader)
   weeklyKDheaderRow.appendChild(weeklyKillsheader)
   weeklyKDheaderRow.appendChild(weeklyDeathsheader)
@@ -607,3 +643,42 @@ function createStatDiv(header, value) {
   div.appendChild(document.createTextNode(value));
   return stat;
 };
+
+function sortTable(n, passedtable) {
+  // Sorts a table, needs to be passed a column reference and a table element
+  // Stolen and adapted from https://www.w3schools.com/howto/howto_js_sort_table.asp
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = passedtable
+  switching = true;
+  dir = "asc";
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      switchcount++;
+    } else {
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
