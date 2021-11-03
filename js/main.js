@@ -71,7 +71,6 @@ leaderboard.addEventListener("click", function(evt) {
   var leaderboardContent = document.getElementsByClassName("leaderboardContent");
   leaderboardContent[0].innerHTML = '';
   createLeaderboards()
-  leaderboardContent[0].style.display = "block";
 })
 
 // Creates new timeout function for fecth requests
@@ -414,6 +413,8 @@ function createRecentGame(game) {
 
 function createLeaderboards() {
 
+  var counter = 0
+
   var leaderboardContent = document.getElementsByClassName("leaderboardContent");
 
   if (localStorage.getItem("favouritesList") === null) {
@@ -444,7 +445,7 @@ function createLeaderboards() {
   lifetimeplayerheader.innerHTML = "Player &#8597"
   lifetimeKillsheader.innerHTML = "Kills &#8597"
   lifetimeDeathsheader.innerHTML = "Deaths &#8597"
-  lifetimeKDheader.innerHTML = "KD &#8597"
+  lifetimeKDheader.innerHTML = "KD Ratio &#8597"
   lifetimeKDheaderRow.appendChild(lifetimeplayerheader)
   lifetimeKDheaderRow.appendChild(lifetimeKillsheader)
   lifetimeKDheaderRow.appendChild(lifetimeDeathsheader)
@@ -502,7 +503,7 @@ function createLeaderboards() {
   weeklyplayerheader.innerHTML = "Player &#8597"
   weeklyKillsheader.innerHTML = "Kills &#8597"
   weeklyDeathsheader.innerHTML = "Deaths &#8597"
-  weeklyKDheader.innerHTML = "KD &#8597"
+  weeklyKDheader.innerHTML = "KD Ratio &#8597"
   weeklyKDheaderRow.appendChild(weeklyplayerheader)
   weeklyKDheaderRow.appendChild(weeklyKillsheader)
   weeklyKDheaderRow.appendChild(weeklyDeathsheader)
@@ -583,6 +584,14 @@ function createLeaderboards() {
           weeklyKDtable.appendChild(weeklyKDtr)
         })
 
+        counter = counter + 1
+
+        if (counter == favouritesList.length) {
+          leaderboardContent[0].appendChild(leaderboardSection);
+          hideLoadScreen()
+          leaderboardContent[0].style.display = "block";
+        }
+
     }
   }
 
@@ -603,9 +612,6 @@ function createLeaderboards() {
   leaderboardSection.appendChild(lifetimeWinstable)
   leaderboardSection.appendChild(weeklyKDh3)
   leaderboardSection.appendChild(weeklyKDtable)
-
-  leaderboardContent[0].appendChild(leaderboardSection);
-  hideLoadScreen()
 
 }
 
