@@ -1,5 +1,5 @@
 var CACHE_TITLE = 'warzone-stats-cache';
-var CACHE_VERSION = 'v1.03';
+var CACHE_VERSION = 'v1.04';
 var CACHE_NAME = CACHE_TITLE + '-' + CACHE_VERSION;
 var urlsToCache = [
   'css/style.css',
